@@ -5,7 +5,7 @@ import './GroupStageContainer.css'
 
 export function GroupStageContainer() {
   return (
-    <section className="group-stage-container" aria-label="World Cup Group Stage">
+    <section className="container group-stage-container" aria-label="World Cup Group Stage">
       <RoundHeading
         heading="Group Stage"
         subheading="Group winners, runners-up and the eight best third-placed teams will advance to the Round of 32"

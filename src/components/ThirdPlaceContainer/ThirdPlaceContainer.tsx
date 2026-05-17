@@ -21,7 +21,7 @@ export function ThirdPlaceContainer() {
   }
 
   return (
-    <section className="third-place-container">
+    <section className="container third-place-container">
       <RoundHeading
         heading="Third-Place Finishers"
         subheading="Points determine the eight that progress. Pick nations that are split on points manually..."

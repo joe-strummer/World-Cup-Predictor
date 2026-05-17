@@ -1,5 +1,14 @@
 import './App.css'
-import { GroupStageContainer, ThirdPlaceContainer, Toolbar } from './components'
+import {
+  GroupStageContainer,
+  ThirdPlaceContainer,
+  RoundOf32Container,
+  RoundOf16Container,
+  QuarterFinalsContainer,
+  SemiFinalsContainer,
+  FinalContainer,
+  Toolbar,
+} from './components'
 
 function App() {
   return (
@@ -10,6 +19,11 @@ function App() {
       <Toolbar />
       <GroupStageContainer />
       <ThirdPlaceContainer />
+      <RoundOf32Container />
+      <RoundOf16Container />
+      <QuarterFinalsContainer />
+      <SemiFinalsContainer />
+      <FinalContainer />
     </main>
   )
 }
