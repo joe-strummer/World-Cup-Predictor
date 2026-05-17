@@ -1,0 +1,44 @@
+.group-table-wrap {
+  margin-top: 8px;
+}
+
+.group-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  color: var(--text);
+}
+
+.group-table th,
+.group-table td {
+  padding: 4px;
+  text-align: right;
+  width: .5rem;
+}
+
+.group-table th:first-child,
+.group-table th:nth-child(2),
+.group-table td:first-child,
+.group-table td:nth-child(2) {
+  text-align: left;
+}
+
+.group-table th:nth-child(2) {
+  width: 3rem;
+}
+
+.group-table tr {
+  border-bottom: .5px solid var(--border);
+}
+
+.group-table th {
+  font-weight: 700;
+}
+
+.group-table__row--qualify {
+  background: var(--qualify);
+}
+
+.group-table__row--playoffs {
+  background: var(--playoffs);
+}

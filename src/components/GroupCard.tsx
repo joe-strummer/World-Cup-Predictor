@@ -1,5 +1,7 @@
 import type { Fixture } from '../data/fixtures'
 import { usePredictions } from '../context/PredictionsContext'
+import { getTeamTotals } from '../utils/GroupTableUtils'
+import { GroupTable } from './GroupTable'
 import { MatchRow } from './MatchRow'
 import './GroupCard.css'
 
@@ -10,6 +12,7 @@ type GroupCardProps = {
 
 export function GroupCard({ letter, matches }: GroupCardProps) {
   const { predictions, setPrediction } = usePredictions()
+  const teamTotals = getTeamTotals(matches, predictions)
 
   return (
     <article className="group-card">
@@ -26,6 +29,7 @@ export function GroupCard({ letter, matches }: GroupCardProps) {
           />
         ))}
       </div>
+      <GroupTable teams={teamTotals} />
     </article>
   )
 }
