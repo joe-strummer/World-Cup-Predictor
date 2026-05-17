@@ -6,15 +6,16 @@ import type { TeamButtonLargeState } from '../TeamButtonLarge/TeamButtonLarge'
 import './ThirdPlaceContainer.css'
 
 export function ThirdPlaceContainer() {
-  const { predictions } = usePredictions()
+  const { predictions, thirdPlaceSelections, toggleThirdPlaceSelection } = usePredictions()
   const thirdPlaceTeams = getThirdPlaceTeams(FIXTURES_BY_GROUP, predictions)
-  const { automatic, eliminated } = classifyThirdPlaceTeams(thirdPlaceTeams)
+  const { automatic, tiedForSelection, eliminated, spotsRemaining } = classifyThirdPlaceTeams(thirdPlaceTeams)
   const groups = Object.keys(FIXTURES_BY_GROUP)
 
   function getState(group: string): TeamButtonLargeState | undefined {
     const team = thirdPlaceTeams.find(t => t.group === group)
     if (!team) return undefined
-    if (automatic.some(t => t.group === group)) return 'selected'
+    if (automatic.some(t => t.group === group)) return 'automatic'
+    if (thirdPlaceSelections.includes(group)) return 'selected'
     if (eliminated.some(t => t.group === group)) return 'greyed'
     return 'unselected'
   }
@@ -29,6 +30,7 @@ export function ThirdPlaceContainer() {
         {groups.map((group) => {
           const team = thirdPlaceTeams.find(t => t.group === group)
           const state = getState(group)
+          const isTied = tiedForSelection.some(t => t.group === group)
 
           return (
             <TeamButtonLarge
@@ -37,6 +39,7 @@ export function ThirdPlaceContainer() {
               points={team?.points}
               placeholder={!team}
               state={state}
+              onClick={isTied ? () => toggleThirdPlaceSelection(group, spotsRemaining) : undefined}
             />
           )
         })}

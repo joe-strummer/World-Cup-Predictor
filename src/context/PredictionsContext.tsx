@@ -15,6 +15,8 @@ type PredictionsContextValue = {
   setPrediction: (matchId: string, prediction: MatchPrediction) => void
   togglePrediction: (matchId: string, prediction: MatchPrediction) => void
   resetPredictions: () => void
+  thirdPlaceSelections: string[]
+  toggleThirdPlaceSelection: (group: string, spotsRemaining: number) => void
 }
 
 const PredictionsContext = createContext<PredictionsContextValue | undefined>(undefined)
@@ -25,6 +27,7 @@ type PredictionsProviderProps = {
 
 export function PredictionsProvider({ children }: PredictionsProviderProps) {
   const [predictions, setPredictions] = useState<PredictionsState>({})
+  const [thirdPlaceSelections, setThirdPlaceSelections] = useState<string[]>([])
 
   const value = useMemo<PredictionsContextValue>(() => {
     return {
@@ -51,9 +54,22 @@ export function PredictionsProvider({ children }: PredictionsProviderProps) {
       },
       resetPredictions: () => {
         setPredictions({})
+        setThirdPlaceSelections([])
+      },
+      thirdPlaceSelections,
+      toggleThirdPlaceSelection: (group, spotsRemaining) => {
+        setThirdPlaceSelections((current) => {
+          if (current.includes(group)) {
+            return current.filter(g => g !== group)
+          }
+          if (current.length >= spotsRemaining) {
+            return [...current.slice(0, -1), group]
+          }
+          return [...current, group]
+        })
       },
     }
-  }, [predictions])
+  }, [predictions, thirdPlaceSelections])
 
   return <PredictionsContext.Provider value={value}>{children}</PredictionsContext.Provider>
 }

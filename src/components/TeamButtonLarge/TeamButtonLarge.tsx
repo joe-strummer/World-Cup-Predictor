@@ -1,7 +1,7 @@
 import { COUNTRY_NAMES, type CountryCode } from '../../data/countryNames'
 import './TeamButtonLarge.css'
 
-export type TeamButtonLargeState = 'unselected' | 'selected' | 'greyed'
+export type TeamButtonLargeState = 'unselected' | 'selected' | 'automatic' | 'greyed'
 
 type TeamButtonLargeProps = {
   team?: CountryCode

@@ -16,6 +16,12 @@
   background: var(--highlight);
 }
 
+.team-button-large--automatic {
+  background: var(--highlight);
+  border: 2px solid transparent;
+  cursor: unset;
+}
+
 .team-button-large--greyed {
   opacity: 0.5;
   cursor: not-allowed;
