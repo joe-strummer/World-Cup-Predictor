@@ -1,10 +1,10 @@
 import './TeamButton.css'
-import { COUNTRY_NAMES } from '../data/countryNames'
+import { COUNTRY_NAMES, type CountryCode } from '../data/countryNames'
 
 export type TeamButtonState = 'unselected' | 'selected' | 'greyed'
 
 type TeamButtonProps = {
-  label: string
+  label: CountryCode | 'Draw'
   state?: TeamButtonState
   onClick?: () => void
 }
@@ -14,7 +14,7 @@ export function TeamButton({
   state = 'unselected',
   onClick,
 }: TeamButtonProps) {
-  const countryName = COUNTRY_NAMES[label] || label
+  const countryName = label === 'Draw' ? 'Draw' : COUNTRY_NAMES[label]
   const flagSrc = `/flags/${label}.svg`
 
   return (

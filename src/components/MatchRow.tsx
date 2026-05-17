@@ -1,49 +1,55 @@
-import { useState } from 'react'
+import type { CountryCode } from '../data/countryNames'
+import type { MatchPrediction } from '../context/PredictionsContext'
 import { TeamButton } from './TeamButton'
 import './MatchRow.css'
 
 type MatchRowProps = {
-  teamA: string
-  teamB: string
+  matchId: string
+  teamA: CountryCode
+  teamB: CountryCode
+  prediction: MatchPrediction | null
+  onPredictionChange: (matchId: string, prediction: MatchPrediction) => void
 }
 
-type Selection = 'teamA' | 'draw' | 'teamB' | null
-
-export function MatchRow({ teamA, teamB }: MatchRowProps) {
-  const [selected, setSelected] = useState<Selection>(null)
-
-  const toggleSelection = (option: Selection) => {
-    setSelected(selected === option ? null: option)
-  }
-
-  const resolveState = (option: Selection) => {
-    if (selected === null) {
+export function MatchRow({
+  matchId,
+  teamA,
+  teamB,
+  prediction,
+  onPredictionChange,
+}: MatchRowProps) {
+  const resolveState = (option: MatchPrediction) => {
+    if (prediction === null) {
       return 'unselected'
     }
-    
-    if (selected === option) {
+
+    if (prediction === option) {
       return 'selected'
     }
 
     return 'greyed'
   }
 
+  const togglePrediction = (option: MatchPrediction) => {
+    onPredictionChange(matchId, option)
+  }
+
   return (
     <div className="match-row">
       <TeamButton
         label={teamA}
-        state={resolveState('teamA')}
-        onClick={() => toggleSelection('teamA')}
+        state={resolveState(teamA)}
+        onClick={() => togglePrediction(teamA)}
       />
       <TeamButton
         label="Draw"
-        state={resolveState('draw')}
-        onClick={() => toggleSelection('draw')}
+        state={resolveState('Draw')}
+        onClick={() => togglePrediction('Draw')}
       />
       <TeamButton
         label={teamB}
-        state={resolveState('teamB')}
-        onClick={() => toggleSelection('teamB')}
+        state={resolveState(teamB)}
+        onClick={() => togglePrediction(teamB)}
       />
     </div>
   )

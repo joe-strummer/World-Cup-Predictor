@@ -1,7 +1,9 @@
+import type { CountryCode } from './countryNames'
+
 export type Fixture = {
   id: string
-  teamA: string
-  teamB: string
+  teamA: CountryCode
+  teamB: CountryCode
 }
 
 export const FIXTURES_BY_GROUP: Record<string, Fixture[]> = {

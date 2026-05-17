@@ -1,4 +1,4 @@
-export const COUNTRY_NAMES: Record<string, string> = {
+export const COUNTRY_NAMES = {
   ALG: 'Algeria',
   ARG: 'Argentina',
   AUS: 'Australia',
@@ -48,3 +48,5 @@ export const COUNTRY_NAMES: Record<string, string> = {
   USA: 'United States',
   UZB: 'Uzbekistan',
 }
+
+export type CountryCode = keyof typeof COUNTRY_NAMES
