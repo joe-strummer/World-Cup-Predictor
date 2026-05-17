@@ -67,3 +67,35 @@ export function getStandings(teams: TeamTotals[]): StandingRow[] {
       rank: index + 1,
     }))
 }
+
+export type ThirdPlaceTeam = {
+  team: CountryCode
+  points: number
+  group: string
+}
+
+export function getThirdPlaceTeams(
+  fixturesByGroup: Record<string, Fixture[]>,
+  predictions: Record<string, MatchPrediction>
+): ThirdPlaceTeam[] {
+  const thirdPlaceTeams: ThirdPlaceTeam[] = []
+
+  for (const [group, matches] of Object.entries(fixturesByGroup)) {
+    const allPredicted = matches.every(match => predictions[match.id])
+    if (!allPredicted) continue
+
+    const totals = getTeamTotals(matches, predictions)
+    const standings = getStandings(totals)
+    const thirdPlace = standings.find(row => row.rank === 3)
+
+    if (thirdPlace) {
+      thirdPlaceTeams.push({
+        team: thirdPlace.team,
+        points: thirdPlace.points,
+        group,
+      })
+    }
+  }
+
+  return thirdPlaceTeams
+}

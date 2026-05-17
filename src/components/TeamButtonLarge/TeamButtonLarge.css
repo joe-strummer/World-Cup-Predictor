@@ -7,7 +7,7 @@
   padding: 16px 12px;
   border: 2px solid var(--border);
   border-radius: 8px;
-  background: var(--background);
+  background: var(--card-background);
   cursor: pointer;
   transition: background-color 120ms ease;
 }
@@ -21,10 +21,21 @@
   cursor: not-allowed;
 }
 
+.team-button-large--placeholder {
+  cursor: default;
+}
+
 .team-button-large__flag {
   width: 48px;
   border-radius: 2px;
   object-fit: contain;
+}
+
+.team-button-large__flag-placeholder {
+  width: 48px;
+  height: 36px;
+  border-radius: 2px;
+  background: var(--border);
 }
 
 .team-button-large__name {

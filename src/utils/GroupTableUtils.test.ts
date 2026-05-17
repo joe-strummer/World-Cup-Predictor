@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import type { Fixture } from '../data/fixtures'
 import type { MatchPrediction } from '../context/PredictionsContext'
-import { getTeamTotals, getStandings, type TeamTotals } from './GroupTableUtils'
+import { getTeamTotals, getStandings, getThirdPlaceTeams, type TeamTotals } from './GroupTableUtils'
 
 const matches: Fixture[] = [
   { id: 'match1', teamA: 'MEX', teamB: 'RSA' },
@@ -115,5 +115,43 @@ describe('getStandings', () => {
       { team: 'KOR', wins: 1, losses: 2, draws: 0, points: 3, rank: 3 },
       { team: 'CZE', wins: 0, losses: 2, draws: 1, points: 1, rank: 4 },
     ])
+  })
+})
+
+describe('getThirdPlaceTeams', () => {
+  it('returns the third-place team for a fully predicted group', () => {
+    const fixturesByGroup = {
+      A: matches,
+    }
+
+    const predictions = {
+      match1: 'MEX',
+      match2: 'KOR',
+      match3: 'Draw',
+      match4: 'MEX',
+      match5: 'MEX',
+      match6: 'RSA',
+    } as Record<string, MatchPrediction>
+
+    const result = getThirdPlaceTeams(fixturesByGroup, predictions)
+
+    expect(result).toEqual([
+      { team: 'KOR', points: 3, group: 'A' },
+    ])
+  })
+
+  it('returns empty array when group is not fully predicted', () => {
+    const fixturesByGroup = {
+      A: matches,
+    }
+
+    const predictions = {
+      match1: 'MEX',
+      match2: 'KOR',
+    } as Record<string, MatchPrediction>
+
+    const result = getThirdPlaceTeams(fixturesByGroup, predictions)
+
+    expect(result).toEqual([])
   })
 })

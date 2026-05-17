@@ -1,18 +1,15 @@
-import type { CountryCode } from '../../data/countryNames'
+import { usePredictions } from '../../context/PredictionsContext'
+import { FIXTURES_BY_GROUP } from '../../data/fixtures'
+import { getThirdPlaceTeams } from '../../utils/GroupTableUtils'
 import { RoundHeading } from '../RoundHeading'
 import { TeamButtonLarge } from '../TeamButtonLarge'
 import './ThirdPlaceContainer.css'
 
-type ThirdPlaceTeam = {
-  team: CountryCode
-  points: number
-}
+export function ThirdPlaceContainer() {
+  const { predictions } = usePredictions()
+  const thirdPlaceTeams = getThirdPlaceTeams(FIXTURES_BY_GROUP, predictions)
+  const groups = Object.keys(FIXTURES_BY_GROUP)
 
-type ThirdPlaceContainerProps = {
-  teams: ThirdPlaceTeam[]
-}
-
-export function ThirdPlaceContainer({ teams }: ThirdPlaceContainerProps) {
   return (
     <section className="third-place-container">
       <RoundHeading
@@ -20,9 +17,18 @@ export function ThirdPlaceContainer({ teams }: ThirdPlaceContainerProps) {
         subheading="Points determine the eight that progress. Pick nations that are split on points manually..."
       />
       <div className="third-place-container__grid">
-        {teams.map(({ team, points }) => (
-          <TeamButtonLarge key={team} team={team} points={points} />
-        ))}
+        {groups.map((group) => {
+          const team = thirdPlaceTeams.find(t => t.group === group)
+
+          return (
+            <TeamButtonLarge
+              key={group}
+              team={team?.team}
+              points={team?.points}
+              placeholder={!team}
+            />
+          )
+        })}
       </div>
     </section>
   )
