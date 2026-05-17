@@ -1,0 +1,16 @@
+.round-heading {
+  text-align: center;
+}
+
+.round-heading__title {
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.round-heading__subtitle {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}

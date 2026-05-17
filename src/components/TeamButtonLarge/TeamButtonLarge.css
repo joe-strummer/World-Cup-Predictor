@@ -1,0 +1,36 @@
+.team-button-large {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--background);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.team-button-large--selected {
+  background: var(--highlight);
+}
+
+.team-button-large--greyed {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.team-button-large__flag {
+  width: 48px;
+  border-radius: 2px;
+  object-fit: contain;
+}
+
+.team-button-large__name {
+  font-size: 0.75rem;
+}
+
+.team-button-large__points {
+  font-size: 0.6rem;
+}

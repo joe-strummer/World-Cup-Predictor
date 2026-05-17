@@ -1,0 +1,1 @@
+export { ThirdPlaceContainer } from './ThirdPlaceContainer'
