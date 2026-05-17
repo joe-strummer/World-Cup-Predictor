@@ -1,8 +1,7 @@
 import { usePredictions } from '../../context/PredictionsContext'
 import { FIXTURES_BY_GROUP } from '../../data/fixtures'
 import { getThirdPlaceTeams } from '../../utils/GroupTableUtils'
-import { RoundHeading } from '../RoundHeading'
-import { TeamButtonLarge } from '../TeamButtonLarge'
+import { RoundHeading, TeamButtonLarge } from '../'
 import './ThirdPlaceContainer.css'
 
 export function ThirdPlaceContainer() {

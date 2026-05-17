@@ -13,6 +13,8 @@ export type PredictionsState = Record<string, MatchPrediction>
 type PredictionsContextValue = {
   predictions: PredictionsState
   setPrediction: (matchId: string, prediction: MatchPrediction) => void
+  togglePrediction: (matchId: string, prediction: MatchPrediction) => void
+  resetPredictions: () => void
 }
 
 const PredictionsContext = createContext<PredictionsContextValue | undefined>(undefined)
@@ -28,6 +30,12 @@ export function PredictionsProvider({ children }: PredictionsProviderProps) {
     return {
       predictions,
       setPrediction: (matchId, prediction) => {
+        setPredictions((current) => ({
+          ...current,
+          [matchId]: prediction,
+        }))
+      },
+      togglePrediction: (matchId, prediction) => {
         setPredictions((current) => {
           if (current[matchId] === prediction) {
             const next = { ...current }
@@ -40,6 +48,9 @@ export function PredictionsProvider({ children }: PredictionsProviderProps) {
             [matchId]: prediction,
           }
         })
+      },
+      resetPredictions: () => {
+        setPredictions({})
       },
     }
   }, [predictions])

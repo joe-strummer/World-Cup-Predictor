@@ -1,29 +1,36 @@
 .group-stage-container {
   width: 100%;
   max-width: 1300px;
-  box-sizing: border-box;
-  margin: 0 auto;
   padding: 16px;
+  box-sizing: border-box;
+  margin: 2rem auto;
+}
+
+.group-stage-container__grid {
   display: grid;
   gap: 14px;
+  margin-top: 1.5rem;
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 @media (max-width: 1200px) {
-  .group-stage-container {
+  .group-stage-container__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 900px) {
-  .group-stage-container {
+  .group-stage-container__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 600px) {
   .group-stage-container {
-    grid-template-columns: 1fr;
     padding: 12px;
+  }
+
+  .group-stage-container__grid {
+    grid-template-columns: 1fr;
   }
 }

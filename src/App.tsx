@@ -1,6 +1,5 @@
 import './App.css'
-import { GroupStageContainer } from './components/GroupStageContainer'
-import { ThirdPlaceContainer } from './components/ThirdPlaceContainer'
+import { GroupStageContainer, ThirdPlaceContainer, Toolbar } from './components'
 
 function App() {
   return (
@@ -8,6 +7,7 @@ function App() {
       <header className="app-shell__header">
         <h1>World Cup Predictor</h1>
       </header>
+      <Toolbar />
       <GroupStageContainer />
       <ThirdPlaceContainer />
     </main>
