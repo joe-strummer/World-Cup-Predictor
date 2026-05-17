@@ -1,8 +1,8 @@
-import type { Fixture } from '../data/fixtures'
-import { usePredictions } from '../context/PredictionsContext'
-import { getTeamTotals } from '../utils/GroupTableUtils'
-import { GroupTable } from './GroupTable'
-import { MatchRow } from './MatchRow'
+import type { Fixture } from '../../data/fixtures'
+import { usePredictions } from '../../context/PredictionsContext'
+import { getTeamTotals } from '../../utils/GroupTableUtils'
+import { GroupTable } from '../GroupTable'
+import { MatchRow } from '../MatchRow'
 import './GroupCard.css'
 
 type GroupCardProps = {

@@ -1,4 +1,4 @@
-import { getStandings, type StandingRow, type TeamTotals } from '../utils/GroupTableUtils'
+import { getStandings, type StandingRow, type TeamTotals } from '../../utils/GroupTableUtils'
 import './GroupTable.css'
 
 function TableRow({ row }: { row: StandingRow }) {

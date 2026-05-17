@@ -1,5 +1,5 @@
 import './TeamButton.css'
-import { COUNTRY_NAMES, type CountryCode } from '../data/countryNames'
+import { COUNTRY_NAMES, type CountryCode } from '../../data/countryNames'
 
 export type TeamButtonState = 'unselected' | 'selected' | 'greyed'
 

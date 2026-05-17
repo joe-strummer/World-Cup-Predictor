@@ -1,6 +1,6 @@
-import type { CountryCode } from '../data/countryNames'
-import type { MatchPrediction } from '../context/PredictionsContext'
-import { TeamButton } from './TeamButton'
+import type { CountryCode } from '../../data/countryNames'
+import type { MatchPrediction } from '../../context/PredictionsContext'
+import { TeamButton } from '../TeamButton'
 import './MatchRow.css'
 
 type MatchRowProps = {

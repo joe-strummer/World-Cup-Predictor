@@ -1,5 +1,5 @@
-import { FIXTURES_BY_GROUP } from '../data/fixtures'
-import { GroupCard } from './GroupCard'
+import { FIXTURES_BY_GROUP } from '../../data/fixtures'
+import { GroupCard } from '../GroupCard'
 import './GroupStageContainer.css'
 
 export function GroupStageContainer() {
