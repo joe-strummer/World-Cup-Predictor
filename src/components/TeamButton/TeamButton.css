@@ -7,7 +7,6 @@
   color: var(--text);
   font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
   cursor: pointer;
   transition: background-color 120ms ease, opacity 120ms ease;
   display: flex;
