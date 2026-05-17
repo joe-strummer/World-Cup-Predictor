@@ -9,4 +9,17 @@
   font-weight: 600;
   letter-spacing: 0.03em;
   cursor: pointer;
+  transition: background-color 120ms ease, opacity 120ms ease;
+}
+
+.team-button--selected {
+  background: var(--highlight);
+}
+
+.team-button--greyed {
+  opacity: 0.5;
+}
+
+.team-button:not(.team-button--selected):hover {
+  background: var(--card-background);
 }
