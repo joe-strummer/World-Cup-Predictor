@@ -1,9 +1,10 @@
 .toolbar {
+  max-width: 1300px;
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  padding: 16px;
-  margin: 1rem 0;
+  padding: 8px;
+  margin: 0 auto;
 }
 
 .toolbar__button {
@@ -12,6 +13,6 @@
   border-radius: 4px;
   background: var(--card-background);
   cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
