@@ -99,3 +99,46 @@ export function getThirdPlaceTeams(
 
   return thirdPlaceTeams
 }
+
+export type ThirdPlaceResult = {
+  automatic: ThirdPlaceTeam[]
+  tiedForSelection: ThirdPlaceTeam[]
+  eliminated: ThirdPlaceTeam[]
+  spotsRemaining: number
+}
+
+export function classifyThirdPlaceTeams(teams: ThirdPlaceTeam[]): ThirdPlaceResult {
+  const totalSpots = 8
+  const automatic: ThirdPlaceTeam[] = []
+  const tiedForSelection: ThirdPlaceTeam[] = []
+  const eliminated: ThirdPlaceTeam[] = []
+
+  const pointTiers = new Map<number, ThirdPlaceTeam[]>()
+  for (const team of teams) {
+    const tier = pointTiers.get(team.points) ?? []
+    tier.push(team)
+    pointTiers.set(team.points, tier)
+  }
+
+  const sortedPointsDescending = Array.from(pointTiers.keys()).sort((a, b) => b - a)
+
+  for (const points of sortedPointsDescending) {
+    const tier = pointTiers.get(points)!
+    const spotsLeft = totalSpots - automatic.length
+
+    if (tier.length <= spotsLeft && tiedForSelection.length === 0) {
+      automatic.push(...tier)
+    } else if (tiedForSelection.length === 0 && spotsLeft > 0) {
+      tiedForSelection.push(...tier)
+    } else {
+      eliminated.push(...tier)
+    }
+  }
+
+  return {
+    automatic,
+    tiedForSelection,
+    eliminated,
+    spotsRemaining: totalSpots - automatic.length,
+  }
+}

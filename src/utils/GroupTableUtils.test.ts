@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import type { Fixture } from '../data/fixtures'
 import type { MatchPrediction } from '../context/PredictionsContext'
-import { getTeamTotals, getStandings, getThirdPlaceTeams, type TeamTotals } from './GroupTableUtils'
+import { getTeamTotals, getStandings, getThirdPlaceTeams, classifyThirdPlaceTeams, type TeamTotals } from './GroupTableUtils'
 
 const matches: Fixture[] = [
   { id: 'match1', teamA: 'MEX', teamB: 'RSA' },
@@ -153,5 +153,56 @@ describe('getThirdPlaceTeams', () => {
     const result = getThirdPlaceTeams(fixturesByGroup, predictions)
 
     expect(result).toEqual([])
+  })
+})
+
+describe('classifyThirdPlaceTeams', () => {
+  it('auto-selects top 8 when all have different points', () => {
+    const teams = [
+      { team: 'MEX' as const, points: 7, group: 'A' },
+      { team: 'KOR' as const, points: 6, group: 'B' },
+      { team: 'CZE' as const, points: 5, group: 'C' },
+      { team: 'RSA' as const, points: 4, group: 'D' },
+      { team: 'BRA' as const, points: 4, group: 'E' },
+      { team: 'GER' as const, points: 3, group: 'F' },
+      { team: 'JPN' as const, points: 3, group: 'G' },
+      { team: 'ENG' as const, points: 3, group: 'H' },
+      { team: 'FRA' as const, points: 2, group: 'I' },
+      { team: 'ARG' as const, points: 2, group: 'J' },
+      { team: 'USA' as const, points: 1, group: 'K' },
+      { team: 'CAN' as const, points: 0, group: 'L' },
+    ]
+
+    const result = classifyThirdPlaceTeams(teams)
+
+    expect(result.automatic).toHaveLength(8)
+    expect(result.tiedForSelection).toHaveLength(0)
+    expect(result.eliminated).toHaveLength(4)
+    expect(result.spotsRemaining).toBe(0)
+  })
+
+  it('leaves tied teams for manual selection when they exceed remaining spots', () => {
+    const teams = [
+      { team: 'MEX' as const, points: 7, group: 'A' },
+      { team: 'KOR' as const, points: 7, group: 'B' },
+      { team: 'CZE' as const, points: 5, group: 'C' },
+      { team: 'RSA' as const, points: 4, group: 'D' },
+      { team: 'BRA' as const, points: 4, group: 'E' },
+      { team: 'GER' as const, points: 4, group: 'F' },
+      { team: 'JPN' as const, points: 3, group: 'G' },
+      { team: 'ENG' as const, points: 3, group: 'H' },
+      { team: 'FRA' as const, points: 3, group: 'I' },
+      { team: 'ARG' as const, points: 3, group: 'J' },
+      { team: 'USA' as const, points: 1, group: 'K' },
+      { team: 'CAN' as const, points: 0, group: 'L' },
+    ]
+
+    const result = classifyThirdPlaceTeams(teams)
+
+    // 7pts(2) + 5pts(1) + 4pts(3) = 6 automatic, 3pts(4) tied for 2 spots
+    expect(result.automatic).toHaveLength(6)
+    expect(result.tiedForSelection).toHaveLength(4)
+    expect(result.eliminated).toHaveLength(2)
+    expect(result.spotsRemaining).toBe(2)
   })
 })
