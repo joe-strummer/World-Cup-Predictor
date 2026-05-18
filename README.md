@@ -4,7 +4,7 @@ Predict the 2026 FIFA World Cup.
 
 ## Requirements
 
-- Node.js >= 20
+- Node.js >= 22.12.0
 
 ## Getting Started
 
